@@ -77,6 +77,7 @@ npm run refresh            # pull feeds, write data/latest.json
 npm run research           # same, plus Claude web research (needs ANTHROPIC_API_KEY)
 npm start                  # serve on :8080
 npm run build:artifact     # dist/paddock-pavilion.html, the file published as the hosted board
+npm run build:kit          # dist/board-kit.mjs, the one-file helper the daily routine downloads
 node scripts/validate.mjs data/latest.json   # schema check (also used by the daily routine)
 ```
 
@@ -90,7 +91,7 @@ src/research.mjs      Claude + web search research, one validated update per ser
 src/sources/          F1 (Jolpica) and MotoGP feed adapters
 web/index.html        the page (same file for the hosted and self-hosted versions)
 data/curated.json     hand-checked series, F1 next-season fallback, headlines
-scripts/              feeds.mjs, validate.mjs, build-artifact.mjs
+scripts/              feeds.mjs, validate.mjs, build-artifact.mjs, kit.mjs
 deploy/               systemd unit, Caddyfile
 docs/daily-refresh.md the prompt the hosted board's daily routine runs
 ```
