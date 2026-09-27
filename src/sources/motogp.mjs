@@ -27,7 +27,8 @@ function mapEvent(e, year, seq, winners) {
     ...(sessions.length ? { sessions } : {}),
     status,
     ...(w ? { result: `Winner: ${w}` } : {}),
-    link: e.url || 'https://www.motogp.com/en/calendar',
+    // The API's `url` field is a slug ("Thailand") and `urls` are hospitality offers, so link the calendar.
+    link: 'https://www.motogp.com/en/calendar',
   };
 }
 

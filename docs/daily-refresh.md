@@ -28,6 +28,9 @@ Database layout (use the ArtifactData tool; load it with ToolSearch if it is def
 
 Steps:
 
+Timestamps: take every timestamp you write (`updatedAt`, `refreshedAt`) from `date -u +%Y-%m-%dT%H:%M:%SZ`
+at the moment you write it. Never round or estimate one.
+
 1. Work in your scratchpad directory. Read the current state with ArtifactData `list` on `series` and on
    `meta`, passing `out_dir` so each document lands as a JSON file. Note each document's `version`.
 2. Live feeds. Download the board's helper script with the Artifact tool: `action: "read"`, the URL
@@ -56,7 +59,7 @@ Steps:
 6. Write everything back in one ArtifactData `batch` of `set` operations (one `file_path` per
    document), pinning each write with the `if_version` you read in step 1. Include `meta/status` with
    `refreshedAt` (now, ISO), `runBy: "daily refresh"`, `note` copied unchanged from the current status
-   document, and `changes`: one sentence on what changed today. If a pinned write conflicts, re-read
+   document, and `changes`: one sentence on what this run actually changed in the documents it wrote. If a pinned write conflicts, re-read
    that document, redo your change on top of it, and write again.
 7. End with a short summary of what changed (new events, results, corrections), or say briefly that
    nothing notable changed.
