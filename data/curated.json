@@ -1,0 +1,271 @@
+{
+  "_about": "Hand-curated series that have no free structured feed. The daily refresh (Claude routine or src/research.mjs) keeps this current. F1 and MotoGP come from live APIs; the f1 fallback below is only used when the API has no calendar for the following season yet.",
+  "curatedAt": "2026-09-27T12:00:00Z",
+  "fallbacks": {
+    "f1NextSeason": {
+      "season": 2027,
+      "source": { "label": "Formula 1 calendar announcement, 16 Sep 2026", "url": "https://www.formula1.com/en/racing/2027" },
+      "events": [
+        { "round": 1, "title": "Bahrain Grand Prix", "place": "Bahrain International Circuit, Sakhir", "start": "2027-03-12", "end": "2027-03-14", "note": "Sprint weekend" },
+        { "round": 2, "title": "Saudi Arabian Grand Prix", "place": "Jeddah Corniche Circuit", "start": "2027-03-19", "end": "2027-03-21" },
+        { "round": 3, "title": "Australian Grand Prix", "place": "Albert Park, Melbourne", "start": "2027-04-02", "end": "2027-04-04", "note": "First ever Melbourne sprint" },
+        { "round": 4, "title": "Japanese Grand Prix", "place": "Suzuka", "start": "2027-04-09", "end": "2027-04-11", "note": "Sprint weekend" },
+        { "round": 5, "title": "Chinese Grand Prix", "place": "Shanghai International Circuit", "start": "2027-04-16", "end": "2027-04-18" },
+        { "round": 6, "title": "Miami Grand Prix", "place": "Miami International Autodrome", "start": "2027-04-30", "end": "2027-05-02" },
+        { "round": 7, "title": "Canadian Grand Prix", "place": "Circuit Gilles Villeneuve, Montreal", "start": "2027-05-21", "end": "2027-05-23", "note": "Sprint weekend" },
+        { "round": 8, "title": "Monaco Grand Prix", "place": "Circuit de Monaco", "start": "2027-06-04", "end": "2027-06-06", "note": "Sprint weekend" },
+        { "round": 9, "title": "Portuguese Grand Prix", "place": "Autódromo do Algarve, Portimão", "start": "2027-06-18", "end": "2027-06-20", "note": "Returns to the calendar" },
+        { "round": 10, "title": "British Grand Prix", "place": "Silverstone", "start": "2027-07-02", "end": "2027-07-04", "note": "Sprint weekend" },
+        { "round": 11, "title": "Austrian Grand Prix", "place": "Red Bull Ring, Spielberg", "start": "2027-07-09", "end": "2027-07-11" },
+        { "round": 12, "title": "Belgian Grand Prix", "place": "Spa-Francorchamps", "start": "2027-07-23", "end": "2027-07-25" },
+        { "round": 13, "title": "Hungarian Grand Prix", "place": "Hungaroring, Budapest", "start": "2027-07-30", "end": "2027-08-01" },
+        { "round": 14, "title": "Italian Grand Prix", "place": "Monza", "start": "2027-09-03", "end": "2027-09-05", "note": "Sprint weekend" },
+        { "round": 15, "title": "Spanish Grand Prix", "place": "Madring, Madrid", "start": "2027-09-10", "end": "2027-09-12" },
+        { "round": 16, "title": "Azerbaijan Grand Prix", "place": "Baku City Circuit", "start": "2027-09-24", "end": "2027-09-26" },
+        { "round": 17, "title": "Turkish Grand Prix", "place": "Istanbul Park", "start": "2027-10-01", "end": "2027-10-03", "note": "Returns to the calendar" },
+        { "round": 18, "title": "Singapore Grand Prix", "place": "Marina Bay Street Circuit", "start": "2027-10-08", "end": "2027-10-10" },
+        { "round": 19, "title": "United States Grand Prix", "place": "Circuit of the Americas, Austin", "start": "2027-10-22", "end": "2027-10-24" },
+        { "round": 20, "title": "Mexico City Grand Prix", "place": "Autódromo Hermanos Rodríguez", "start": "2027-10-29", "end": "2027-10-31" },
+        { "round": 21, "title": "Brazilian Grand Prix", "place": "Interlagos, São Paulo", "start": "2027-11-05", "end": "2027-11-07", "note": "Sprint weekend" },
+        { "round": 22, "title": "Las Vegas Grand Prix", "place": "Las Vegas Strip Circuit", "start": "2027-11-18", "end": "2027-11-20" },
+        { "round": 23, "title": "Qatar Grand Prix", "place": "Lusail International Circuit", "start": "2027-12-03", "end": "2027-12-05", "note": "Sprint weekend" },
+        { "round": 24, "title": "Abu Dhabi Grand Prix", "place": "Yas Marina", "start": "2027-12-10", "end": "2027-12-12", "note": "Sprint weekend" }
+      ]
+    }
+  },
+  "series": [
+    {
+      "id": "wrc",
+      "name": "World Rally Championship",
+      "code": "WRC",
+      "sport": "motorsport",
+      "order": 3,
+      "season": "2026",
+      "summary": "Evans leads Pajari by 17 points going into the Sardegna finale. Rally Saudi Arabia was cancelled because of the war in the Middle East. The 2027 calendar has 14 rounds; dates not yet published.",
+      "standings": {
+        "title": "Drivers after round 12 (Chile)",
+        "rows": [
+          { "pos": 1, "name": "Elfyn Evans", "team": "Toyota", "pts": 230 },
+          { "pos": 2, "name": "Sami Pajari", "team": "Toyota", "pts": 213 },
+          { "pos": 3, "name": "Oliver Solberg", "team": "Toyota", "pts": 209 },
+          { "pos": 4, "name": "Sébastien Ogier", "team": "Toyota", "pts": 171 },
+          { "pos": 5, "name": "Adrien Fourmaux", "team": "Hyundai", "pts": 167 }
+        ]
+      },
+      "source": { "label": "wrc.com calendar", "url": "https://www.wrc.com/en/calendar" },
+      "events": [
+        { "id": "wrc-2026-01", "round": 1, "title": "Rallye Monte-Carlo", "place": "Monaco & French Alps", "start": "2026-01-22", "end": "2026-01-25", "status": "done", "result": "Winner: Oliver Solberg" },
+        { "id": "wrc-2026-02", "round": 2, "title": "Rally Sweden", "place": "Umeå, Sweden", "start": "2026-02-12", "end": "2026-02-15", "status": "done", "result": "Winner: Elfyn Evans" },
+        { "id": "wrc-2026-03", "round": 3, "title": "Safari Rally Kenya", "place": "Naivasha, Kenya", "start": "2026-03-12", "end": "2026-03-15", "status": "done", "result": "Winner: Takamoto Katsuta" },
+        { "id": "wrc-2026-04", "round": 4, "title": "Croatia Rally", "place": "Rijeka, Croatia", "start": "2026-04-09", "end": "2026-04-12", "status": "done", "result": "Winner: Takamoto Katsuta" },
+        { "id": "wrc-2026-05", "round": 5, "title": "Rally Islas Canarias", "place": "Gran Canaria, Spain", "start": "2026-04-23", "end": "2026-04-26", "status": "done", "result": "Winner: Sébastien Ogier" },
+        { "id": "wrc-2026-06", "round": 6, "title": "Rally de Portugal", "place": "Matosinhos, Portugal", "start": "2026-05-07", "end": "2026-05-10", "status": "done", "result": "Winner: Thierry Neuville" },
+        { "id": "wrc-2026-07", "round": 7, "title": "Rally Japan", "place": "Aichi & Gifu, Japan", "start": "2026-05-28", "end": "2026-05-31", "status": "done", "result": "Winner: Elfyn Evans" },
+        { "id": "wrc-2026-08", "round": 8, "title": "Acropolis Rally Greece", "place": "Loutraki, Greece", "start": "2026-06-25", "end": "2026-06-28", "status": "done", "result": "Winner: Sébastien Ogier" },
+        { "id": "wrc-2026-09", "round": 9, "title": "Rally Estonia", "place": "Tartu, Estonia", "start": "2026-07-16", "end": "2026-07-19", "status": "done", "result": "Winner: Sami Pajari" },
+        { "id": "wrc-2026-10", "round": 10, "title": "Rally Finland", "place": "Jyväskylä, Finland", "start": "2026-07-30", "end": "2026-08-02", "status": "done", "result": "Winner: Sami Pajari" },
+        { "id": "wrc-2026-11", "round": 11, "title": "Rally del Paraguay", "place": "Encarnación, Paraguay", "start": "2026-08-27", "end": "2026-08-30", "status": "done", "result": "Winner: Sami Pajari" },
+        { "id": "wrc-2026-12", "round": 12, "title": "Rally Chile", "place": "Concepción, Chile", "start": "2026-09-10", "end": "2026-09-13", "status": "done", "result": "Winner: Oliver Solberg" },
+        { "id": "wrc-2026-13", "round": 13, "title": "Rally Italia Sardegna", "place": "Olbia, Sardinia", "start": "2026-10-01", "end": "2026-10-04", "status": "scheduled", "note": "Season finale. Title decider", "hot": true, "link": "https://www.wrc.com/en/calendar" },
+        { "id": "wrc-2026-14", "round": 14, "title": "Rally Saudi Arabia", "place": "Jeddah, Saudi Arabia", "start": "2026-11-11", "end": "2026-11-14", "status": "cancelled", "note": "Cancelled due to the conflict in the Middle East" }
+      ]
+    },
+    {
+      "id": "dakar",
+      "name": "Dakar Rally",
+      "code": "DKR",
+      "sport": "motorsport",
+      "order": 4,
+      "season": "2027",
+      "summary": "The 49th Dakar is a loop from King Abdullah Economic City with 5,320 km of timed stages. That is the longest competitive distance of the Saudi era and the longest route in 18 years.",
+      "standings": null,
+      "source": { "label": "dakar.com", "url": "https://www.dakar.com/en" },
+      "events": [
+        { "id": "dakar-2027", "title": "Dakar Rally 2027", "place": "King Abdullah Economic City (loop), Saudi Arabia", "start": "2027-01-01", "end": "2027-01-15", "status": "scheduled", "note": "5,320 km timed · three new stage formats · round 1 of W2RC 2027", "hot": true, "link": "https://www.redbull.com/us-en/dakar-rally-route-2027" }
+      ]
+    },
+    {
+      "id": "w2rc",
+      "name": "World Rally-Raid Championship",
+      "code": "W2RC",
+      "sport": "motorsport",
+      "order": 5,
+      "season": "2026–27",
+      "summary": "The 2026 season ends in Abu Dhabi for the first time. The 2027 season opens with the Dakar and ends in Morocco.",
+      "standings": null,
+      "source": { "label": "worldrallyraidchampionship.com", "url": "https://www.worldrallyraidchampionship.com/en/calendar" },
+      "events": [
+        { "id": "w2rc-2026-maroc", "title": "Rallye du Maroc", "place": "Morocco", "start": "2026-09-28", "end": "2026-10-03", "status": "scheduled", "note": "W2RC 2026, penultimate round" },
+        { "id": "w2rc-2026-addc", "title": "Abu Dhabi Desert Challenge", "place": "Liwa, UAE", "start": "2026-11-22", "end": "2026-11-27", "status": "scheduled", "note": "W2RC 2026 finale" },
+        { "id": "w2rc-2027-safari", "title": "Safari Rally-Raid South Africa", "place": "South Africa", "start": "2027-06-14", "end": "2027-06-19", "status": "scheduled", "note": "W2RC 2027, round 3" },
+        { "id": "w2rc-2027-portugal", "title": "BP Ultimate Rally-Raid Portugal", "place": "Portugal", "start": "2027-09-21", "end": "2027-09-26", "status": "scheduled", "note": "W2RC 2027, round 4" },
+        { "id": "w2rc-2027-maroc", "title": "Rallye du Maroc", "place": "Morocco", "start": "2027-10-24", "end": "2027-10-29", "status": "scheduled", "note": "W2RC 2027 finale" }
+      ]
+    },
+    {
+      "id": "iomtt",
+      "name": "Isle of Man TT",
+      "code": "TT",
+      "sport": "motorsport",
+      "order": 6,
+      "season": "2027",
+      "summary": "TT 2027 runs 31 May to 12 June. Qualifying week starts on the late-May bank holiday and the Senior TT closes the fortnight on Saturday 12 June.",
+      "standings": null,
+      "source": { "label": "iomttraces.com", "url": "https://www.iomttraces.com/racing/page/schedule/" },
+      "events": [
+        { "id": "iomtt-2027-q", "title": "Isle of Man TT: qualifying week", "place": "Snaefell Mountain Course, Isle of Man", "start": "2027-05-31", "end": "2027-06-04", "status": "scheduled", "note": "Qualifying Mon 31 May to Fri 4 June" },
+        { "id": "iomtt-2027-races", "title": "Isle of Man TT: race week", "place": "Snaefell Mountain Course, Isle of Man", "start": "2027-06-05", "end": "2027-06-12", "status": "scheduled", "note": "Racing Sat 5 June to Sat 12 June; Milwaukee Senior TT on the final Saturday", "hot": true, "link": "https://www.iomttraces.com/latest/news/tt-2027-dates-isle-of-man-tt-races/" },
+        { "id": "iomtt-2028", "title": "Isle of Man TT 2028", "place": "Snaefell Mountain Course, Isle of Man", "start": "2028-05-29", "end": "2028-06-10", "status": "provisional", "note": "Provisional dates" }
+      ]
+    },
+    {
+      "id": "wec",
+      "name": "World Endurance Championship & Le Mans",
+      "code": "WEC",
+      "sport": "motorsport",
+      "order": 7,
+      "season": "2026–27",
+      "summary": "Qatar and Bahrain were dropped from 2026 because of the Middle East situation; Barcelona and Monza replace them. The 2027 season has nine rounds, with Silverstone back and Le Mans on 12–13 June.",
+      "standings": {
+        "title": "Hypercar drivers, 2026",
+        "rows": [
+          { "pos": 1, "name": "Robin Frijns / René Rast", "team": "BMW M Team WRT", "pts": null }
+        ]
+      },
+      "source": { "label": "fiawec.com", "url": "https://www.fiawec.com/en/season/about" },
+      "events": [
+        { "id": "wec-2026-01", "round": 1, "title": "6 Hours of Imola", "place": "Imola, Italy", "start": "2026-04-19", "end": "2026-04-19", "status": "done", "result": "Winner: #8 Toyota (Buemi / Hartley / Hirakawa)" },
+        { "id": "wec-2026-02", "round": 2, "title": "6 Hours of Spa-Francorchamps", "place": "Spa, Belgium", "start": "2026-05-09", "end": "2026-05-09", "status": "done", "result": "Winner: #20 BMW M Team WRT (Rast / Frijns / van der Linde)" },
+        { "id": "wec-2026-03", "round": 3, "title": "24 Hours of Le Mans", "place": "Circuit de la Sarthe, Le Mans", "start": "2026-06-13", "end": "2026-06-14", "status": "done", "result": "Winner: #7 Toyota (Conway / Kobayashi / de Vries)" },
+        { "id": "wec-2026-04", "round": 4, "title": "6 Hours of São Paulo", "place": "Interlagos, Brazil", "start": "2026-07-12", "end": "2026-07-12", "status": "done" },
+        { "id": "wec-2026-05", "round": 5, "title": "Lone Star Le Mans", "place": "Circuit of the Americas, Austin", "start": "2026-09-06", "end": "2026-09-06", "status": "done" },
+        { "id": "wec-2026-06", "round": 6, "title": "6 Hours of Fuji", "place": "Fuji Speedway, Japan", "start": "2026-09-27", "end": "2026-09-27", "status": "done" },
+        { "id": "wec-2026-07", "round": 7, "title": "6 Hours of Barcelona", "place": "Circuit de Barcelona-Catalunya", "start": "2026-10-18", "end": "2026-10-18", "status": "scheduled", "note": "Replaces the cancelled Qatar round" },
+        { "id": "wec-2026-08", "round": 8, "title": "6 Hours of Monza", "place": "Monza, Italy", "start": "2026-11-08", "end": "2026-11-08", "status": "scheduled", "note": "Season finale; replaces Bahrain", "hot": true },
+        { "id": "wec-2027-00", "title": "WEC Prologue (official test)", "place": "Lusail, Qatar", "start": "2027-03-21", "end": "2027-03-22", "status": "scheduled" },
+        { "id": "wec-2027-01", "round": 1, "title": "Qatar 1812 km", "place": "Lusail, Qatar", "start": "2027-03-27", "end": "2027-03-27", "status": "scheduled" },
+        { "id": "wec-2027-02", "round": 2, "title": "6 Hours of Imola", "place": "Imola, Italy", "start": "2027-04-11", "end": "2027-04-11", "status": "scheduled" },
+        { "id": "wec-2027-03", "round": 3, "title": "6 Hours of Silverstone", "place": "Silverstone, UK", "start": "2027-04-25", "end": "2027-04-25", "status": "scheduled", "note": "Back for the first time since 2019–20" },
+        { "id": "wec-2027-04", "round": 4, "title": "6 Hours of Spa-Francorchamps", "place": "Spa, Belgium", "start": "2027-05-15", "end": "2027-05-15", "status": "scheduled" },
+        { "id": "wec-2027-05", "round": 5, "title": "24 Hours of Le Mans", "place": "Circuit de la Sarthe, Le Mans", "start": "2027-06-12", "end": "2027-06-13", "status": "scheduled", "hot": true, "link": "https://www.24h-lemans.com/en" },
+        { "id": "wec-2027-06", "round": 6, "title": "6 Hours of São Paulo", "place": "Interlagos, Brazil", "start": "2027-07-11", "end": "2027-07-11", "status": "scheduled" },
+        { "id": "wec-2027-07", "round": 7, "title": "Lone Star Le Mans", "place": "Circuit of the Americas, Austin", "start": "2027-09-12", "end": "2027-09-12", "status": "scheduled" },
+        { "id": "wec-2027-08", "round": 8, "title": "6 Hours of Fuji", "place": "Fuji Speedway, Japan", "start": "2027-09-26", "end": "2027-09-26", "status": "scheduled" },
+        { "id": "wec-2027-09", "round": 9, "title": "8 Hours of Bahrain", "place": "Sakhir, Bahrain", "start": "2027-11-06", "end": "2027-11-06", "status": "scheduled" }
+      ]
+    },
+    {
+      "id": "endurance",
+      "name": "24-hour classics",
+      "code": "24H",
+      "sport": "motorsport",
+      "order": 8,
+      "season": "2027",
+      "summary": "The other big twice-round-the-clock races outside the WEC. Le Mans is listed under WEC.",
+      "standings": null,
+      "source": { "label": "IMSA, ADAC, SRO", "url": "https://www.imsa.com/events/2027-rolex-24-at-daytona/" },
+      "events": [
+        { "id": "24h-2027-daytona", "title": "Rolex 24 at Daytona", "place": "Daytona International Speedway, USA", "start": "2027-01-28", "end": "2027-01-31", "status": "scheduled", "note": "Green flag Saturday 30 January" },
+        { "id": "24h-2027-nring", "title": "Nürburgring 24 Hours", "place": "Nürburgring Nordschleife, Germany", "start": "2027-05-27", "end": "2027-05-30", "status": "scheduled" },
+        { "id": "24h-2027-spa", "title": "CrowdStrike 24 Hours of Spa", "place": "Spa-Francorchamps, Belgium", "start": "2027-06-23", "end": "2027-06-27", "status": "scheduled" }
+      ]
+    },
+    {
+      "id": "cricket-india",
+      "name": "Team India fixtures",
+      "code": "IND",
+      "sport": "cricket",
+      "order": 10,
+      "season": "2026–27",
+      "summary": "The West Indies are in India now. India then play 12 matches in New Zealand, Sri Lanka visit in December, and Australia arrive in January for a five-Test Border-Gavaskar Trophy.",
+      "standings": null,
+      "source": { "label": "ESPNcricinfo / BCCI", "url": "https://www.espncricinfo.com/team/india-6/match-schedule-fixtures" },
+      "events": [
+        { "id": "ind-wi-odi1", "title": "India v West Indies, 1st ODI", "place": "Thiruvananthapuram", "start": "2026-09-27", "end": "2026-09-27", "status": "done", "result": "India won by 8 wickets" },
+        { "id": "ind-wi-odi2", "title": "India v West Indies, 2nd ODI", "place": "Guwahati", "start": "2026-09-30", "end": "2026-09-30", "status": "scheduled" },
+        { "id": "ind-wi-odi3", "title": "India v West Indies, 3rd ODI", "place": "Mullanpur (New Chandigarh)", "start": "2026-10-03", "end": "2026-10-03", "status": "scheduled" },
+        { "id": "ind-wi-t201", "title": "India v West Indies, 1st T20I", "place": "Lucknow", "start": "2026-10-06", "end": "2026-10-06", "status": "scheduled" },
+        { "id": "ind-wi-t202", "title": "India v West Indies, 2nd T20I", "place": "Ranchi", "start": "2026-10-09", "end": "2026-10-09", "status": "scheduled" },
+        { "id": "ind-wi-t203", "title": "India v West Indies, 3rd T20I", "place": "Indore", "start": "2026-10-11", "end": "2026-10-11", "status": "scheduled" },
+        { "id": "ind-wi-t204", "title": "India v West Indies, 4th T20I", "place": "Hyderabad", "start": "2026-10-14", "end": "2026-10-14", "status": "scheduled" },
+        { "id": "ind-wi-t205", "title": "India v West Indies, 5th T20I", "place": "Bengaluru", "start": "2026-10-17", "end": "2026-10-17", "status": "scheduled" },
+        { "id": "indw-zimw", "title": "India Women v Zimbabwe Women (3 T20Is, 3 ODIs)", "place": "India", "start": "2026-10-16", "end": "2026-10-28", "status": "scheduled", "note": "Women's series" },
+        { "id": "nz-ind-t201", "title": "New Zealand v India, 1st T20I", "place": "Hagley Oval, Christchurch", "start": "2026-10-22", "end": "2026-10-22", "time": "2026-10-22T07:00:00Z", "timeLabel": "Start", "status": "scheduled", "hot": true },
+        { "id": "nz-ind-t202", "title": "New Zealand v India, 2nd T20I", "place": "Hagley Oval, Christchurch", "start": "2026-10-24", "end": "2026-10-24", "time": "2026-10-24T07:00:00Z", "timeLabel": "Start", "status": "scheduled" },
+        { "id": "nz-ind-t203", "title": "New Zealand v India, 3rd T20I", "place": "Hnry Stadium, Wellington", "start": "2026-10-27", "end": "2026-10-27", "time": "2026-10-27T07:00:00Z", "timeLabel": "Start", "status": "scheduled" },
+        { "id": "nz-ind-t204", "title": "New Zealand v India, 4th T20I", "place": "Eden Park, Auckland", "start": "2026-10-30", "end": "2026-10-30", "time": "2026-10-30T07:00:00Z", "timeLabel": "Start", "status": "scheduled" },
+        { "id": "nz-ind-t205", "title": "New Zealand v India, 5th T20I", "place": "Seddon Park, Hamilton", "start": "2026-11-01", "end": "2026-11-01", "time": "2026-11-01T07:00:00Z", "timeLabel": "Start", "status": "scheduled" },
+        { "id": "nz-ind-odi1", "title": "New Zealand v India, 1st ODI", "place": "Eden Park, Auckland", "start": "2026-11-04", "end": "2026-11-04", "time": "2026-11-04T02:00:00Z", "timeLabel": "Start", "status": "scheduled" },
+        { "id": "nz-ind-odi2", "title": "New Zealand v India, 2nd ODI", "place": "Hnry Stadium, Wellington", "start": "2026-11-07", "end": "2026-11-07", "time": "2026-11-07T02:00:00Z", "timeLabel": "Start", "status": "scheduled" },
+        { "id": "nz-ind-odi3", "title": "New Zealand v India, 3rd ODI", "place": "Seddon Park, Hamilton", "start": "2026-11-10", "end": "2026-11-10", "time": "2026-11-10T02:00:00Z", "timeLabel": "Start", "status": "scheduled" },
+        { "id": "nz-ind-odi4", "title": "New Zealand v India, 4th ODI", "place": "Bay Oval, Tauranga", "start": "2026-11-13", "end": "2026-11-13", "time": "2026-11-13T02:00:00Z", "timeLabel": "Start", "status": "scheduled" },
+        { "id": "nz-ind-odi5", "title": "New Zealand v India, 5th ODI", "place": "Bay Oval, Tauranga", "start": "2026-11-15", "end": "2026-11-15", "time": "2026-11-15T02:00:00Z", "timeLabel": "Start", "status": "scheduled" },
+        { "id": "nz-ind-test1", "title": "New Zealand v India, 1st Test", "place": "Basin Reserve, Wellington", "start": "2026-11-19", "end": "2026-11-23", "time": "2026-11-18T22:00:00Z", "timeLabel": "Day 1", "status": "scheduled", "hot": true },
+        { "id": "nz-ind-test2", "title": "New Zealand v India, 2nd Test", "place": "Hagley Oval, Christchurch", "start": "2026-11-27", "end": "2026-12-01", "time": "2026-11-26T22:00:00Z", "timeLabel": "Day 1", "status": "scheduled" },
+        { "id": "saw-indw", "title": "South Africa Women v India Women (1 Test, 3 ODIs, 3 T20Is)", "place": "South Africa", "start": "2026-12-09", "end": "2026-12-30", "status": "scheduled", "note": "Women's tour" },
+        { "id": "ind-sl", "title": "India v Sri Lanka (3 ODIs, 3 T20Is)", "place": "India", "start": "2026-12-13", "end": "2026-12-27", "status": "scheduled" },
+        { "id": "ind-zim", "title": "India v Zimbabwe (3 ODIs)", "place": "India", "start": "2027-01-03", "end": "2027-01-09", "status": "scheduled" },
+        { "id": "ind-aus-bgt", "title": "Border-Gavaskar Trophy: India v Australia (5 Tests)", "place": "India", "start": "2027-01-21", "end": "2027-03-03", "status": "scheduled", "hot": true, "link": "https://en.wikipedia.org/wiki/International_cricket_in_2026%E2%80%9327" }
+      ]
+    },
+    {
+      "id": "cricket-world",
+      "name": "World cricket",
+      "code": "CRI",
+      "sport": "cricket",
+      "order": 11,
+      "season": "2026–27",
+      "summary": "The big bilateral tours and ICC events beyond India. The pink-ball 150th Anniversary Test at the MCG in March 2027 is the one to circle.",
+      "standings": null,
+      "source": { "label": "ESPNcricinfo / ICC", "url": "https://www.espncricinfo.com/ci/engine/match/index.html?view=calendar" },
+      "events": [
+        { "id": "cri-asiangames", "title": "Asian Games men's cricket (T20)", "place": "Aichi-Nagoya, Japan", "start": "2026-09-24", "end": "2026-10-03", "status": "scheduled", "note": "Medal matches on 3 October", "hot": true, "link": "https://www.olympics.com/en/news/asian-games-2026-cricket-schedule" },
+        { "id": "cri-sa-aus", "title": "South Africa v Australia (3 Tests, 3 ODIs)", "place": "South Africa", "start": "2026-09-24", "end": "2026-10-31", "status": "scheduled" },
+        { "id": "cri-pak-sl", "title": "Pakistan v Sri Lanka (2 Tests, 3 T20Is)", "place": "Pakistan", "start": "2026-10-09", "end": "2026-11-21", "status": "scheduled" },
+        { "id": "cri-ban-wi", "title": "Bangladesh v West Indies (2 Tests)", "place": "Bangladesh", "start": "2026-10-28", "end": "2026-11-09", "status": "scheduled" },
+        { "id": "cri-aus-eng-odi1", "title": "Australia v England, 1st ODI", "place": "Optus Stadium, Perth", "start": "2026-11-13", "end": "2026-11-13", "time": "2026-11-13T03:30:00Z", "timeLabel": "Start", "status": "scheduled" },
+        { "id": "cri-aus-eng-odi2", "title": "Australia v England, 2nd ODI", "place": "Adelaide Oval", "start": "2026-11-15", "end": "2026-11-15", "time": "2026-11-15T03:30:00Z", "timeLabel": "Start", "status": "scheduled" },
+        { "id": "cri-aus-eng-odi3", "title": "Australia v England, 3rd ODI", "place": "Bellerive Oval, Hobart", "start": "2026-11-18", "end": "2026-11-18", "time": "2026-11-18T03:30:00Z", "timeLabel": "Start", "status": "scheduled" },
+        { "id": "cri-sa-ban", "title": "South Africa v Bangladesh (2 Tests, 3 ODIs, 3 T20Is)", "place": "South Africa", "start": "2026-11-15", "end": "2026-12-13", "status": "scheduled" },
+        { "id": "cri-aus-eng-t20s", "title": "Australia v England, 5 T20Is", "place": "Melbourne, Gold Coast, Brisbane, Sydney, Canberra", "start": "2026-11-21", "end": "2026-12-02", "time": "2026-11-21T08:15:00Z", "timeLabel": "1st T20I", "status": "scheduled" },
+        { "id": "cri-aus-nz", "title": "Australia v New Zealand (4 Tests)", "place": "Australia", "start": "2026-12-09", "end": "2027-01-08", "status": "scheduled" },
+        { "id": "cri-sa-eng", "title": "South Africa v England (3 Tests, 3 ODIs)", "place": "South Africa", "start": "2026-12-17", "end": "2027-01-15", "status": "scheduled", "hot": true },
+        { "id": "cri-wct-2027", "title": "ICC Women's Champions Trophy", "place": "India", "start": "2027-02-14", "end": null, "status": "scheduled", "note": "Starts 14 February; end date not yet confirmed", "hot": true },
+        { "id": "cri-cwcq-2027", "title": "Men's Cricket World Cup Qualifier", "place": "TBC", "start": "2027-02-22", "end": null, "status": "scheduled", "note": "Decides the last places at the 2027 World Cup; end date not yet confirmed" },
+        { "id": "cri-aus-eng-150", "title": "150th Anniversary Test: Australia v England", "place": "MCG, Melbourne", "start": "2027-03-11", "end": "2027-03-15", "status": "scheduled", "note": "Pink-ball day-night Test, the first at the MCG", "hot": true, "link": "https://www.cricket.com.au/150th-anniversary-test" }
+      ]
+    },
+    {
+      "id": "worldcups",
+      "name": "World Cups",
+      "code": "WC",
+      "sport": "worldcup",
+      "order": 20,
+      "season": "2026–27",
+      "summary": "Spain are football world champions. Next come the women's football World Cup in Brazil, then back-to-back rugby and cricket World Cups in October–November 2027.",
+      "standings": null,
+      "source": { "label": "FIFA, ICC, World Rugby", "url": "https://www.fifa.com/en/tournaments/womens/womensworldcup/brazil-2027" },
+      "events": [
+        { "id": "wc-fifa-2026", "title": "FIFA World Cup 2026", "place": "USA, Canada & Mexico", "start": "2026-06-11", "end": "2026-07-19", "status": "done", "result": "Spain 1–0 Argentina (a.e.t., Ferran Torres 106′)", "link": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026" },
+        { "id": "wc-fifaw-2027", "title": "FIFA Women's World Cup 2027", "place": "Brazil", "start": "2027-06-24", "end": "2027-07-25", "status": "scheduled", "note": "First women's World Cup in South America", "hot": true, "link": "https://www.fifa.com/en/tournaments/womens/womensworldcup/brazil-2027" },
+        { "id": "wc-rugby-2027", "title": "Men's Rugby World Cup 2027", "place": "Australia", "start": "2027-10-01", "end": "2027-11-13", "status": "scheduled", "note": "First edition with 24 teams", "link": "https://www.rugbyworldcup.com/2027/en" },
+        { "id": "wc-cricket-2027", "title": "ICC Men's Cricket World Cup 2027", "place": "South Africa, Zimbabwe & Namibia", "start": "2027-10-04", "end": "2027-11-21", "status": "scheduled", "note": "14 teams, 54 matches", "hot": true, "link": "https://www.espncricinfo.com/story/mens-odi-world-cup-2027-dates-set-to-run-from-october-4-to-november-21-1540479" }
+      ]
+    }
+  ],
+  "buzz": {
+    "updatedAt": "2026-09-27T12:00:00Z",
+    "items": [
+      { "series": "f1", "title": "Antonelli, 19, leads the F1 title race by 66 points", "summary": "Kimi Antonelli leads Mercedes team-mate George Russell 302–236 with eight rounds left. Russell won in Baku ahead of Verstappen and Hadjar.", "date": "2026-09-26", "hot": true, "link": "https://www.formula1.com/en/results/2026/drivers" },
+      { "series": "motogp", "title": "Martín and Márquez are 12 points apart", "summary": "Jorge Martín (Aprilia) leads Marc Márquez (Ducati) 306–294 with seven rounds to go. Motegi is next, 2–4 October.", "date": "2026-09-20", "hot": true, "link": "https://www.motogp.com/en/world-standing" },
+      { "series": "f1", "title": "F1 goes back to Sepang for the 'Bahrain GP in Malaysia'", "summary": "The April Bahrain race, cancelled by the Middle East conflict, runs at Sepang on 2–4 October. It is F1's first race in Malaysia since 2017.", "date": "2026-09-25", "hot": true, "link": "https://www.motorsport.com/f1/news/why-is-the-2026-bahrain-grand-prix-taking-place-in-malaysia/10859526/" },
+      { "series": "wrc", "title": "WRC title goes to Sardinia", "summary": "Evans 230, Pajari 213, Solberg 209. Rally Italia Sardegna (1–4 October) is now the finale after Rally Saudi Arabia was cancelled.", "date": "2026-09-14", "hot": true, "link": "https://www.wrc.com/en/calendar" },
+      { "series": "cricket-india", "title": "India open the West Indies series with an 8-wicket win", "summary": "First ODI done in Thiruvananthapuram. The second is in Guwahati on 30 September, then five T20Is from 6 October.", "date": "2026-09-27", "hot": false, "link": "https://en.wikipedia.org/wiki/West_Indian_cricket_team_in_India_in_2026%E2%80%9327" },
+      { "series": "motogp", "title": "MotoGP 2027 calendar: Adelaide and Buenos Aires added", "summary": "22 rounds from Buriram (7 March) to Valencia (28 November). The season also brings 850cc engines and Pirelli tyres.", "date": "2026-09-25", "hot": false, "link": "https://www.motogp.com/en/news/2026/09/25/2027-motogp-calendar-revealed/1092589" },
+      { "series": "dakar", "title": "Dakar 2027 is the longest route in 18 years", "summary": "1–15 January, a loop from King Abdullah Economic City with 5,320 km of timed stages.", "date": "2026-05-13", "hot": false, "link": "https://www.redbull.com/us-en/dakar-rally-route-2027" },
+      { "series": "f1", "title": "F1 2027: Portugal and Turkey return, 10 sprints", "summary": "24 races from Bahrain (14 March) to Abu Dhabi (12 December). Melbourne hosts its first sprint.", "date": "2026-09-16", "hot": false, "link": "https://www.formula1.com/en/latest/article/formula-1-reveals-calendar-for-2027-season-with-10-sprint-events.5J8ePLyjRuMyWEIDNUKgY4" },
+      { "series": "cricket-world", "title": "Asian Games cricket medal matches on 3 October", "summary": "The men's T20 tournament in Aichi-Nagoya runs 24 September to 3 October.", "date": "2026-09-24", "hot": false, "link": "https://www.olympics.com/en/news/asian-games-2026-cricket-schedule" },
+      { "series": "wec", "title": "WEC: two rounds left after Fuji", "summary": "The 6 Hours of Fuji ran on 27 September. Barcelona (18 October) and Monza (8 November) settle the Hypercar title; Frijns and Rast (BMW) led going into Fuji.", "date": "2026-09-27", "hot": false, "link": "https://www.fiawec.com/en/race/6-hours-of-fuji-2026" }
+    ]
+  }
+}

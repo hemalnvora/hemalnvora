@@ -1,0 +1,17 @@
+{
+  "name": "paddock-pavilion",
+  "version": "1.0.0",
+  "description": "Self-updating sports schedule board: F1, MotoGP, WRC, Dakar, Isle of Man TT, WEC/Le Mans, cricket and World Cups.",
+  "type": "module",
+  "private": true,
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node src/server.mjs",
+    "refresh": "node src/refresh.mjs",
+    "research": "node src/refresh.mjs --research",
+    "build:artifact": "node scripts/build-artifact.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.128.0"
+  }
+}

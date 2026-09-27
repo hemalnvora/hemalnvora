@@ -1,0 +1,23 @@
+# systemd unit for running without Docker.
+#   sudo cp -r . /opt/paddock-pavilion && cd /opt/paddock-pavilion && npm ci --omit=dev
+#   sudo cp deploy/paddock-pavilion.service /etc/systemd/system/
+#   echo 'ANTHROPIC_API_KEY=sk-ant-...' | sudo tee /etc/paddock-pavilion.env   # optional
+#   sudo systemctl daemon-reload && sudo systemctl enable --now paddock-pavilion
+[Unit]
+Description=Paddock & Pavilion sports schedule board
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+WorkingDirectory=/opt/paddock-pavilion
+ExecStart=/usr/bin/env node src/server.mjs
+Environment=PORT=8080
+Environment=DATA_DIR=/var/lib/paddock-pavilion
+EnvironmentFile=-/etc/paddock-pavilion.env
+DynamicUser=yes
+StateDirectory=paddock-pavilion
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

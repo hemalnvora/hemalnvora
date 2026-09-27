@@ -1,0 +1,17 @@
+services:
+  board:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      # Optional: lets the server research WRC, Dakar, TT, WEC, cricket and World Cups with Claude + web search.
+      # Without it, F1 and MotoGP still update live and the rest comes from data/curated.json.
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      REFRESH_EVERY_HOURS: ${REFRESH_EVERY_HOURS:-3}
+      RESEARCH_EVERY_HOURS: ${RESEARCH_EVERY_HOURS:-24}
+    volumes:
+      - board-state:/app/state
+
+volumes:
+  board-state:
