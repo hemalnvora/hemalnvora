@@ -24,6 +24,35 @@ const eventSchema = {
     note: { type: 'string' },
     hot: { type: 'boolean', description: 'True only for genuinely hyped events: title deciders, marquee fixtures, finals' },
     link: { type: 'string' },
+    winner: { type: 'string', description: 'Done events: the winning driver, rider, crew or team ("Draw" / "No result" for cricket)' },
+    podium: {
+      type: 'array',
+      description: 'Done races and rallies: top three finishers',
+      items: { type: 'object', properties: { pos: { type: 'integer' }, name: { type: 'string' }, team: { type: 'string' }, detail: { type: 'string', description: 'Time or gap' } }, required: ['pos', 'name'] },
+    },
+    scores: {
+      type: 'array',
+      description: 'Done matches: one entry per team or innings in batting order, e.g. {team: "India", score: "406/2 (43.3 ov)"}',
+      items: { type: 'object', properties: { team: { type: 'string' }, score: { type: 'string' } }, required: ['team', 'score'] },
+    },
+    highlights: { type: 'array', items: { type: 'string' }, description: 'Done events: 1–4 short facts (top scorer, best bowling, player of the match, pole...)' },
+    teams: { type: 'array', items: { type: 'string' }, description: 'Cricket matches: the two teams, using ICC team names' },
+    format: { type: 'string', enum: ['Test', 'ODI', 'T20I'], description: 'Cricket matches only' },
+    home: { type: 'string', description: 'Cricket matches: the home team, omitted at neutral venues' },
+    gender: { type: 'string', enum: ['women'], description: "Set only for women's matches" },
+    prediction: {
+      type: 'object',
+      description: 'Only for scheduled events with published bookmaker odds: implied probabilities normalised to 100',
+      properties: {
+        method: { type: 'string', enum: ['odds'] },
+        label: { type: 'string', description: 'e.g. "Bookmaker odds (Oddschecker, 3 Oct), normalised"' },
+        asOf: { type: 'string' },
+        picks: { type: 'array', items: { type: 'object', properties: { name: { type: 'string' }, pct: { type: 'number' } }, required: ['name', 'pct'] } },
+        other: { type: 'number' },
+        source: { type: 'object', properties: { label: { type: 'string' }, url: { type: 'string' } }, required: ['url'] },
+      },
+      required: ['method', 'label', 'picks', 'source'],
+    },
   },
   required: ['id', 'title', 'place', 'start', 'end', 'status'],
 };
@@ -138,8 +167,21 @@ function cleanEvent(e) {
     out.time = new Date(e.time).toISOString().replace('.000Z', 'Z');
     out.timeLabel = String(e.timeLabel || 'Start');
   }
-  for (const k of ['result', 'note', 'link']) if (e[k]) out[k] = String(e[k]);
+  for (const k of ['result', 'note', 'link', 'winner', 'home']) if (e[k]) out[k] = String(e[k]);
   if (e.hot === true) out.hot = true;
+  if (['Test', 'ODI', 'T20I'].includes(e.format)) out.format = e.format;
+  if (e.gender === 'women') out.gender = 'women';
+  if (Array.isArray(e.teams) && e.teams.length === 2) out.teams = e.teams.map(String);
+  if (Array.isArray(e.highlights)) out.highlights = e.highlights.filter((x) => typeof x === 'string' && x).slice(0, 4);
+  if (out.status === 'done') {
+    if (Array.isArray(e.podium)) out.podium = e.podium.filter((x) => x?.name && Number.isInteger(x.pos)).slice(0, 3);
+    if (Array.isArray(e.scores)) out.scores = e.scores.filter((x) => x?.team && x?.score).slice(0, 4);
+  } else {
+    delete out.winner;
+  }
+  // Keep a pre-event prediction once the event is done; accept new ones only from published odds.
+  const p = e.prediction;
+  if (p && Array.isArray(p.picks) && p.picks.length && p.label && (p.method === 'odds' ? Boolean(p.source?.url) : out.status === 'done')) out.prediction = p;
   return out;
 }
 
@@ -189,6 +231,8 @@ export async function researchAll({ curatedSeries, buzz, today = new Date(), log
         '3. Add newly announced events for roughly the next 15 months (for cricket: India fixtures match by match when published, other tours as one row per series).',
         '4. Refresh `summary` and `standings` (top 5; standings may be null where there is no championship).',
         '5. Set `hot: true` only on the few events people are most excited about right now.',
+        '6. For finished events fill `winner`, and `podium` (races, rallies) or `scores` (matches) plus up to 4 `highlights`.',
+        '7. For cricket matches keep `teams`, `format`, `home` and `gender`. Keep any existing `prediction` unchanged; add one to a scheduled event only from published bookmaker odds, converted to implied probabilities and normalised to 100, with its source.',
         'Then call submit_series with the complete event list (keep past events from this season too).',
       ].join('\n');
       const input = await runToSubmission(client, { system: SYSTEM, prompt, tool: submitSeriesTool, log });

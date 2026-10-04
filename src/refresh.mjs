@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { fetchF1 } from './sources/f1.mjs';
 import { fetchMotoGP } from './sources/motogp.mjs';
+import { applyCricketRatings } from './predict.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const DATA_DIR = process.env.DATA_DIR || path.join(here, '..', 'data');
@@ -55,12 +56,13 @@ export async function refresh({ research = false, log = console.log } = {}) {
 
   const structured = [];
   const feeds = [
-    ['f1', () => fetchF1({ fallbackNext: curated.fallbacks?.f1NextSeason })],
-    ['motogp', () => fetchMotoGP()],
+    ['f1', (prevSeries) => fetchF1({ fallbackNext: curated.fallbacks?.f1NextSeason, prev: prevSeries })],
+    ['motogp', (prevSeries) => fetchMotoGP({ prev: prevSeries })],
   ];
   for (const [id, fetcher] of feeds) {
     try {
-      const s = await fetcher();
+      // The previous copy keeps pre-race predictions for races that have since finished.
+      const s = await fetcher(prev?.series?.find((x) => x.id === id));
       structured.push({ ...s, updatedAt: now });
       log(`[refresh] ${id}: ${s.events.length} events`);
     } catch (err) {
@@ -73,12 +75,17 @@ export async function refresh({ research = false, log = console.log } = {}) {
   const series = [...structured, ...curatedSeries.map((s) => ({ updatedAt: researched?.researchedAt || curated.curatedAt, ...s }))]
     .sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
 
+  // Cricket win chances from ICC ratings (curated, or refreshed by the research step).
+  const ratings = researched?.cricketRatings ?? curated.cricketRatings;
+  for (const s of series) if (s.sport === 'cricket') applyCricketRatings(s, ratings);
+
   const out = {
     generatedAt: now,
     researchedAt: researched?.researchedAt || null,
     curatedAt: curated.curatedAt,
     series,
     buzz,
+    ...(ratings ? { cricketRatings: ratings } : {}),
   };
   await writeJSON(path.join(DATA_DIR, 'latest.json'), out);
   return out;

@@ -197,6 +197,50 @@
     .date .dn { font-size: 28px; }
   }
 
+  /* View tabs */
+  .viewtabs { display: flex; gap: 24px; border-bottom: 1px solid var(--rule); margin-bottom: 14px; }
+  .viewtabs button { font: 800 24px/1 var(--display); letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink-3); background: none; border: 0; border-bottom: 3px solid transparent; margin-bottom: -1px; padding: 2px 0 10px; cursor: pointer; display: inline-flex; align-items: baseline; gap: 8px; }
+  .viewtabs button:hover { color: var(--ink-2); }
+  .viewtabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
+  .viewtabs .count { font: 500 11px/1 var(--mono); letter-spacing: 0.04em; color: var(--ink-3); }
+
+  /* Win chances */
+  .odds { display: grid; gap: 5px; margin-top: 3px; max-width: 520px; }
+  .oddsbar { display: flex; height: 6px; border-radius: 3px; overflow: hidden; background: var(--surface-2); }
+  .oddsbar span { flex: none; height: 100%; background: color-mix(in srgb, var(--c) var(--o), var(--surface-2)); box-shadow: inset -1px 0 0 var(--surface); }
+  .oddsbar span.draw { background: var(--ink-3); opacity: 0.45; }
+  .oddsline { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; font-size: 13px; color: var(--ink-2); }
+  .oddsline b { color: var(--ink); font-weight: 600; }
+  .oddsline .k { font: 500 10.5px/1 var(--mono); letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-3); }
+  .method-note { margin: 6px 0 4px; font-size: 12.5px; color: var(--ink-2); max-width: 60ch; }
+  .card .fav { font-size: 12.5px; color: var(--ink-2); }
+  .card .fav b { color: var(--ink); font-weight: 600; }
+
+  /* Results */
+  .row.res { grid-template-columns: 64px minmax(0, 1fr) auto; }
+  .record { display: grid; gap: 4px; padding: 12px 14px; margin: 4px 0 6px; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; font-size: 13.5px; color: var(--ink-2); }
+  .record b { color: var(--ink); }
+  .podium, .scores { list-style: none; margin: 4px 0 0; padding: 0; display: grid; gap: 4px; max-width: 520px; }
+  .podium li { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: 10px; align-items: baseline; font-size: 13.5px; }
+  .podium .p { font: 500 11px/1 var(--mono); text-align: center; padding: 4px 0; border-radius: 3px; background: var(--surface-2); color: var(--ink-2); }
+  .podium li:first-child .p { background: var(--ink); color: var(--ground); }
+  .podium .n, .scores .n { min-width: 0; overflow-wrap: anywhere; }
+  .podium li:first-child .n { font-weight: 600; }
+  .podium .n small { color: var(--ink-3); margin-left: 6px; font-size: 12px; }
+  .podium .d, .scores .d { font-family: var(--mono); font-size: 12px; color: var(--ink-2); text-align: right; white-space: nowrap; }
+  .scores li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: baseline; font-size: 13.5px; padding: 2px 0; border-bottom: 1px dotted var(--rule); }
+  .scores .win { font-weight: 600; }
+  .scores .win .d { color: var(--ink); }
+  .hl { font-size: 12.5px; color: var(--ink-2); line-height: 1.45; }
+  .verdict { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: 12.5px; color: var(--ink-2); margin-top: 2px; }
+  .chip.hit { background: var(--green-bg); color: var(--green); }
+  .chip.miss { background: var(--yellow-bg); color: var(--yellow); }
+  .ago { font: 500 11px/1 var(--mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-3); white-space: nowrap; }
+  @media (max-width: 600px) {
+    .row.res { grid-template-columns: 50px minmax(0, 1fr); }
+    .viewtabs button { font-size: 21px; }
+  }
+
   /* Aside */
   aside { display: grid; gap: 34px; }
   .aside-h { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
@@ -209,12 +253,15 @@
   .buzz p { margin: 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.45; }
   .stand { padding: 14px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 8px; }
   .stand .sum { font-size: 13.5px; color: var(--ink-2); margin: 0; }
-  .srow { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; gap: 2px 10px; align-items: baseline; font-size: 13.5px; }
+  .srow { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto auto; gap: 2px 10px; align-items: baseline; font-size: 13.5px; }
+  .srow.head span { font: 500 10px/1 var(--mono); letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-3); text-align: right; }
+  .srow .tp { font-family: var(--mono); font-size: 12.5px; text-align: right; min-width: 3.4em; color: var(--ink); font-weight: 500; }
+  .stand .tnote { font-size: 12px; color: var(--ink-3); margin: 0; }
   .srow .pos { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
   .srow .nm { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .srow .nm small { color: var(--ink-3); margin-left: 6px; }
   .srow .pts { font-family: var(--mono); font-size: 12.5px; }
-  .srow .bar { grid-column: 2 / 4; height: 3px; background: var(--surface-2); border-radius: 2px; overflow: hidden; }
+  .srow .bar { grid-column: 2 / -1; height: 3px; background: var(--surface-2); border-radius: 2px; overflow: hidden; }
   .srow .bar span { display: block; height: 100%; background: var(--c); }
   .gap { color: var(--ink-3); font-family: var(--mono); font-size: 11.5px; margin-left: 6px; }
 
@@ -227,6 +274,9 @@
 
   footer { border-top: 3px solid var(--ink); padding-top: 16px; display: grid; gap: 8px; color: var(--ink-2); font-size: 13.5px; max-width: 80ch; }
   footer p { margin: 0; }
+  .method { display: grid; gap: 6px; }
+  .method h3 { font: 800 18px/1 var(--display); letter-spacing: 0.02em; text-transform: uppercase; color: var(--ink); margin: 6px 0 2px; }
+  .method ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
   .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; font-size: 12.5px; color: var(--ink-2); }
   @media (prefers-reduced-motion: no-preference) {
     .dot-live:not(.stale) { animation: pulse 2.4s ease-in-out infinite; }
@@ -244,6 +294,7 @@
       <div class="updated" id="updated"><span class="dot-live stale"></span>Loading…</div>
       <nav class="jump" aria-label="Sections">
         <a href="#schedule">Schedule</a>
+        <a href="#results">Results</a>
         <a href="#buzz">Buzz</a>
         <a href="#standings">Standings</a>
         <a href="#series">Series</a>
@@ -261,10 +312,14 @@
 
   <div class="layout">
     <main id="schedule">
+      <div class="viewtabs" role="tablist" aria-label="Schedule view">
+        <button type="button" role="tab" id="tab-upcoming" data-view="upcoming" aria-selected="true">Upcoming</button>
+        <button type="button" role="tab" id="tab-results" data-view="results" aria-selected="false">Results <span class="count num" id="results-count"></span></button>
+      </div>
       <div class="controls">
         <div class="seg" id="sport-seg" role="group" aria-label="Sport"></div>
         <div class="chips" id="series-chips" role="group" aria-label="Series"></div>
-        <div class="toggles">
+        <div class="toggles" id="toggles">
           <label for="opt-hot"><input type="checkbox" id="opt-hot"> Hot only</label>
           <label for="opt-done"><input type="checkbox" id="opt-done"> Show finished events</label>
         </div>
@@ -297,6 +352,15 @@
       <span>Purple marks the most hyped events, like a purple sector on a timing screen.</span>
     </div>
     <p id="how"></p>
+    <div class="method">
+      <h3>How the percentages work</h3>
+      <ul>
+        <li><b>F1 and MotoGP:</b> a form model (Plackett–Luce) fitted to this season's race and sprint results, with recent rounds counting more. Its settings were tested on 87 races from 2024–26: the favourite was rated 33% on average and won 30% of the time. Title chances come from simulating the rest of the season 20,000 times with real points tables.</li>
+        <li><b>Cricket:</b> ICC team ratings. The ICC system expects a side rated <i>d</i> points higher to win about 50 + <i>d</i> per cent of matches, capped at 90%. The home team gets a small edge, and Tests keep 15% for a draw.</li>
+        <li><b>Marked "Odds":</b> published bookmaker prices turned into implied chances and scaled to 100%, with the source linked.</li>
+      </ul>
+      <p>These are estimates for interest, not betting advice. The Results tab tracks how often the favourite actually won.</p>
+    </div>
   </footer>
 </div>
 
@@ -322,7 +386,7 @@
   };
 
   function loadPrefs() {
-    const d = { sport: 'all', hidden: [], hotOnly: false, showDone: false };
+    const d = { sport: 'all', hidden: [], hotOnly: false, showDone: false, view: 'upcoming' };
     try {
       const v = JSON.parse(localStorage.getItem('pp-prefs') || 'null');
       if (v && typeof v === 'object') return { ...d, ...v, hidden: Array.isArray(v.hidden) ? v.hidden : [] };
@@ -389,6 +453,60 @@
 
   // ---------- render ----------
   const tagHtml = (s) => `<span class="tag" style="--c:${colorOf(s.id)}"><i></i>${esc(s.code)}</span>`;
+  const fmtPct = (x) => (x >= 99.5 ? '>99%' : x < 1 ? '<1%' : `${Math.round(x)}%`);
+  const PARTICLES = new Set(['di', 'de', 'da', 'del', 'van', 'von', 'der', 'den', 'le', 'la']);
+  function shortName(name, s) {
+    if (s.sport !== 'motorsport' || !/\s/.test(name) || name.startsWith('#')) return name;
+    const parts = name.trim().split(/\s+/);
+    let i = parts.length - 1;
+    while (i > 1 && PARTICLES.has(parts[i - 1].toLowerCase())) i--;
+    return parts.slice(i).join(' ');
+  }
+
+  function oddsHtml(s, e) {
+    const p = e.prediction;
+    const picks = p.picks || [];
+    const segs = picks.map((x, i) => `<span class="${x.name === 'Draw' ? 'draw' : ''}" style="width:${x.pct}%;--o:${Math.max(16, 100 - i * 38)}%"></span>`).join('');
+    const line = picks.slice(0, 3).map((x, i) => (i === 0 ? `<b>${esc(shortName(x.name, s))} ${fmtPct(x.pct)}</b>` : `<span>${esc(shortName(x.name, s))} ${fmtPct(x.pct)}</span>`)).join('');
+    const id = `odds:${e.id}`;
+    const list = picks.map((x) => `<li><span>${esc(x.name)}${x.team ? ` · ${esc(x.team)}` : ''}</span><span class="num">${fmtPct(x.pct)}</span></li>`).join('')
+      + (p.other ? `<li><span>Rest of the field</span><span class="num">${fmtPct(p.other)}</span></li>` : '');
+    return `<div class="odds" style="--c:${colorOf(s.id)}">
+      <div class="oddsbar" role="img" aria-label="${esc(`Win chances: ${picks.map((x) => `${x.name} ${fmtPct(x.pct)}`).join(', ')}`)}">${segs}</div>
+      <div class="oddsline"><span class="k">${p.method === 'odds' ? 'Odds' : 'Win chance'}</span>${line}</div>
+      <details class="sess" data-id="${esc(id)}"${state.open.has(id) ? ' open' : ''}><summary>All chances and method</summary>
+        <p class="method-note">${esc(p.label || '')}${p.source?.url ? ` · <a href="${esc(p.source.url)}" target="_blank" rel="noopener">${esc(p.source.label || 'source')}</a>` : ''}</p>
+        <ul>${list}</ul>
+      </details>
+    </div>`;
+  }
+
+  function verdictHtml(s, e) {
+    const p = e.prediction;
+    if (!p?.picks?.length || !e.winner) return '';
+    const fav = p.picks[0];
+    const by = p.backtest ? 'Model pick from earlier results' : 'Pre-event pick';
+    if (fav.name === e.winner) return `<div class="verdict"><span class="chip hit">Favourite won</span><span>${by}: ${esc(shortName(fav.name, s))} ${fmtPct(fav.pct)}</span></div>`;
+    const w = p.picks.find((x) => x.name === e.winner);
+    const rated = w ? fmtPct(w.pct) : `under ${fmtPct(p.picks[p.picks.length - 1].pct)}`;
+    return `<div class="verdict"><span class="chip miss">Favourite beaten</span><span>${by}: ${esc(shortName(fav.name, s))} ${fmtPct(fav.pct)} · the winner was rated ${rated}</span></div>`;
+  }
+
+  function resultDetailHtml(s, e) {
+    let html = '';
+    if (Array.isArray(e.podium) && e.podium.length) {
+      html += `<ol class="podium">${e.podium.map((x) => `<li><span class="p">P${esc(x.pos)}</span><span class="n">${esc(x.name)}${x.team ? `<small>${esc(x.team)}</small>` : ''}</span><span class="d num">${esc(x.detail || '')}</span></li>`).join('')}</ol>`;
+    } else if (Array.isArray(e.scores) && e.scores.length) {
+      if (e.result) html += `<div class="result">${esc(e.result)}</div>`;
+      html += `<ul class="scores">${e.scores.map((x) => `<li class="${x.team === e.winner ? 'win' : ''}"><span class="n">${esc(x.team)}</span><span class="d num">${esc(x.score)}</span></li>`).join('')}</ul>`;
+    } else if (e.result) {
+      html += `<div class="result">${esc(e.result)}</div>`;
+    } else {
+      html += '<div class="meta">Result not in yet. It is added at the next morning refresh.</div>';
+    }
+    if (Array.isArray(e.highlights) && e.highlights.length) html += `<div class="hl">${e.highlights.map(esc).join(' · ')}</div>`;
+    return html + verdictHtml(s, e);
+  }
 
   function visibleSeries() {
     const p = state.prefs;
@@ -435,6 +553,7 @@
         <div class="p">${esc(e.place)}</div>
         <div class="cd num ${live || ph === 'live' ? 'on' : ''}">${esc(cd)}</div>
         <div class="w num">${esc(when)}</div>
+        ${e.prediction?.picks?.length ? `<div class="fav">${e.prediction.method === 'odds' ? 'Odds favourite' : 'Favourite'} <b>${esc(shortName(e.prediction.picks[0].name, s))}</b> ${fmtPct(e.prediction.picks[0].pct)}</div>` : ''}
       </article>`;
     }).join('');
   }
@@ -474,6 +593,7 @@
         <div class="line1">${tagHtml(s)}<span class="title">${title}</span>${e.hot && ph !== 'done' ? '<span class="chip hot">Hot</span>' : ''}</div>
         <div class="meta">${esc(e.place)}${round}${e.note ? ` · ${esc(e.note)}` : ''}</div>
         ${e.result ? `<div class="result">${esc(e.result)}</div>` : ''}
+        ${(ph === 'upcoming' || ph === 'live') && e.prediction?.picks?.length ? oddsHtml(s, e) : ''}
         ${sessions}
       </div>
       <div class="side">${when}${statusChip(e, ph, today, now)}</div>
@@ -516,6 +636,51 @@
     $('#timeline').innerHTML = html;
   }
 
+  function doneRows() {
+    const today = dayKey(new Date());
+    const rows = [];
+    for (const s of visibleSeries()) {
+      if (state.prefs.hidden.includes(s.id)) continue;
+      for (const e of s.events) if (phase(e, today) === 'done') rows.push({ s, e });
+    }
+    return rows.sort((a, b) => (b.e.end || b.e.start).localeCompare(a.e.end || a.e.start) || keyTime(b.e) - keyTime(a.e));
+  }
+
+  function renderResults(today) {
+    const rows = doneRows();
+    if (!rows.length) { $('#timeline').innerHTML = '<p class="empty">No finished events for these filters yet.</p>'; return; }
+    let html = '';
+    const judged = rows.filter((r) => r.e.prediction?.picks?.length && r.e.winner);
+    if (judged.length >= 3) {
+      const hits = judged.filter((r) => r.e.prediction.picks[0].name === r.e.winner).length;
+      const rate = (100 * hits) / judged.length;
+      const avg = judged.reduce((a, r) => a + r.e.prediction.picks[0].pct, 0) / judged.length;
+      const verdict = Math.abs(rate - avg) <= 8 ? 'about as often as the percentages said they would' : rate > avg ? 'more often than the percentages suggested, so they have been on the cautious side' : 'less often than the percentages suggested, so they have been on the confident side';
+      html += `<div class="record"><span><b>Favourites won ${hits} of ${judged.length}</b> events below (${Math.round(rate)}%). Their average rating was ${Math.round(avg)}%, so favourites have won ${verdict}.</span></div>`;
+    }
+    let month = '';
+    for (const { s, e } of rows) {
+      const m = (e.end || e.start).slice(0, 7);
+      if (m !== month) {
+        month = m;
+        const n = rows.filter((r) => (r.e.end || r.e.start).slice(0, 7) === m).length;
+        html += `<div class="month"><h3>${esc(monthName(m + '-01'))}</h3><span class="label num">${n} result${n === 1 ? '' : 's'}</span></div>`;
+      }
+      const title = e.link ? `<a href="${esc(e.link)}" target="_blank" rel="noopener">${esc(e.title)}</a>` : esc(e.title);
+      const round = Number.isInteger(e.round) ? ` · Round ${e.round}` : '';
+      html += `<div class="row res">
+        ${dateBlock(e)}
+        <div class="body">
+          <div class="line1">${tagHtml(s)}<span class="title">${title}</span></div>
+          <div class="meta">${esc(e.place)}${round}</div>
+          ${resultDetailHtml(s, e)}
+        </div>
+        <div class="side"><span class="ago">${esc(relDay(e.end || e.start, today))}</span></div>
+      </div>`;
+    }
+    $('#timeline').innerHTML = html;
+  }
+
   function renderBuzz(today) {
     const b = state.data.buzz || { items: [] };
     const byId = Object.fromEntries(state.data.series.map((s) => [s.id, s]));
@@ -536,8 +701,10 @@
     $('#stand-list').innerHTML = list.length ? list.map((s) => {
       const rows = s.standings.rows;
       const lead = typeof rows[0].pts === 'number' ? rows[0].pts : null;
+      const hasTitle = rows.some((r) => typeof r.titlePct === 'number');
       return `<div class="stand">
         <div class="line1">${tagHtml(s)}<span class="label">${esc(s.standings.title || '')}</span></div>
+        ${hasTitle ? '<div class="srow head"><span></span><span></span><span>Pts</span><span>Title</span></div>' : ''}
         ${rows.map((r) => {
           const hasPts = typeof r.pts === 'number' && lead;
           const gap = hasPts && r.pos !== 1 ? `<span class="gap">−${lead - r.pts}</span>` : '';
@@ -545,10 +712,12 @@
             <span class="pos num">${esc(r.pos)}</span>
             <span class="nm">${esc(r.name)}${r.team ? `<small>${esc(r.team)}</small>` : ''}</span>
             <span class="pts num">${hasPts ? `${r.pts}${gap}` : ''}</span>
+            <span class="tp num">${typeof r.titlePct === 'number' ? fmtPct(r.titlePct) : ''}</span>
             ${hasPts ? `<span class="bar"><span style="width:${Math.max(2, (r.pts / lead) * 100).toFixed(1)}%;--c:${colorOf(s.id)}"></span></span>` : ''}
           </div>`;
         }).join('')}
         ${s.summary ? `<p class="sum">${esc(s.summary)}</p>` : ''}
+        ${s.standings.titleNote ? `<p class="tnote">${esc(s.standings.titleNote)}</p>` : ''}
       </div>`;
     }).join('') : '<p class="empty">No championship tables for this filter.</p>';
   }
@@ -591,7 +760,12 @@
     renderStatus();
     renderControls();
     renderRail(today, now);
-    renderTimeline(today, now);
+    const results = state.prefs.view === 'results';
+    for (const b of document.querySelectorAll('[data-view]')) b.setAttribute('aria-selected', String(b.dataset.view === state.prefs.view));
+    $('#results-count').textContent = String(doneRows().length);
+    $('#toggles').hidden = results;
+    if (results) renderResults(today);
+    else renderTimeline(today, now);
     renderBuzz(today);
     renderStandings();
     renderNotes();
@@ -599,6 +773,8 @@
 
   // ---------- events ----------
   document.addEventListener('click', (ev) => {
+    const vw = ev.target.closest('[data-view]');
+    if (vw) { state.prefs.view = vw.dataset.view; savePrefs(); render(); return; }
     const sp = ev.target.closest('[data-sport]');
     if (sp) { state.prefs.sport = sp.dataset.sport; savePrefs(); render(); return; }
     const ch = ev.target.closest('[data-series]');
@@ -618,7 +794,19 @@
     if (d.matches && d.matches('details.sess')) d.open ? state.open.add(d.dataset.id) : state.open.delete(d.dataset.id);
   }, true);
 
+  // #results opens the Results tab (bare anchors are the only deep links the viewer passes through).
+  function fromHash() {
+    if (location.hash === '#results') {
+      state.prefs.view = 'results';
+      render();
+      const el = document.getElementById('schedule');
+      if (el) el.scrollIntoView();
+    }
+  }
+  window.addEventListener('hashchange', fromHash);
+
   render();
+  fromHash();
   setInterval(render, 60 * 1000);
 
   // ---------- live data ----------
