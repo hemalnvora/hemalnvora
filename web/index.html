@@ -214,6 +214,9 @@
   .oddsline .k { font: 500 10.5px/1 var(--mono); letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-3); }
   .method-note { margin: 6px 0 4px; font-size: 12.5px; color: var(--ink-2); max-width: 60ch; }
   .card .fav { font-size: 12.5px; color: var(--ink-2); }
+  .cal { font: 500 11px/1 var(--mono); letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-2); text-decoration: none; white-space: nowrap; border: 1px solid var(--rule); border-radius: 4px; padding: 5px 7px; }
+  .cal:hover { color: var(--ink); border-color: var(--ink-3); }
+  .card .cal { justify-self: start; margin-top: 2px; }
   .card .fav b { color: var(--ink); font-weight: 600; }
 
   /* Results */
@@ -454,6 +457,33 @@
   // ---------- render ----------
   const tagHtml = (s) => `<span class="tag" style="--c:${colorOf(s.id)}"><i></i>${esc(s.code)}</span>`;
   const fmtPct = (x) => (x >= 99.5 ? '>99%' : x < 1 ? '<1%' : `${Math.round(x)}%`);
+  // Google Calendar "add event" link: the race or match slot itself when its time is known,
+  // otherwise all-day across the event's dates.
+  const BOARD_URL = 'https://claude.ai/artifact/97HjR5EBb3X6Ya15dkEoyx';
+  const HOURS = { f1: 2, motogp: 1, wec: 6, endurance: 24 };
+  const CRICKET_HOURS = { T20I: 3.5, ODI: 8, Test: 7 };
+  function calLink(s, e) {
+    const gd = (iso) => iso.replace(/-/g, '');
+    let dates;
+    if (e.time) {
+      const t0 = Date.parse(e.time);
+      const h = (s.sport === 'cricket' ? CRICKET_HOURS[e.format] : HOURS[s.id]) || 2;
+      const z = (ms) => new Date(ms).toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+      dates = `${z(t0)}/${z(t0 + h * 3600e3)}`;
+    } else {
+      dates = `${gd(e.start)}/${gd(shiftDay(e.end || e.start, 1))}`;
+    }
+    const fav = e.prediction?.picks?.[0];
+    const details = [
+      e.time ? `${e.timeLabel || 'Start'} time.` : '',
+      e.note || '',
+      fav ? `Favourite: ${fav.name} ${fmtPct(fav.pct)}.` : '',
+      e.link || '',
+      `Paddock & Pavilion: ${BOARD_URL}`,
+    ].filter(Boolean).join('\n');
+    const q = new URLSearchParams({ action: 'TEMPLATE', text: `${s.code}: ${e.title}`, dates, details, location: e.place || '' });
+    return `<a class="cal" href="https://calendar.google.com/calendar/render?${q}" target="_blank" rel="noopener" title="Add to Google Calendar">+ Calendar</a>`;
+  }
   const PARTICLES = new Set(['di', 'de', 'da', 'del', 'van', 'von', 'der', 'den', 'le', 'la']);
   function shortName(name, s) {
     if (s.sport !== 'motorsport' || !/\s/.test(name) || name.startsWith('#')) return name;
@@ -473,7 +503,7 @@
       + (p.other ? `<li><span>Rest of the field</span><span class="num">${fmtPct(p.other)}</span></li>` : '');
     return `<div class="odds" style="--c:${colorOf(s.id)}">
       <div class="oddsbar" role="img" aria-label="${esc(`Win chances: ${picks.map((x) => `${x.name} ${fmtPct(x.pct)}`).join(', ')}`)}">${segs}</div>
-      <div class="oddsline"><span class="k">${p.method === 'odds' ? 'Odds' : 'Win chance'}</span>${line}</div>
+      <div class="oddsline"><span class="k">${p.method === 'odds' ? 'Odds' : p.stage === 'qualifying' ? 'After qualifying' : 'Win chance'}</span>${line}</div>
       <details class="sess" data-id="${esc(id)}"${state.open.has(id) ? ' open' : ''}><summary>All chances and method</summary>
         <p class="method-note">${esc(p.label || '')}${p.source?.url ? ` · <a href="${esc(p.source.url)}" target="_blank" rel="noopener">${esc(p.source.label || 'source')}</a>` : ''}</p>
         <ul>${list}</ul>
@@ -553,6 +583,7 @@
         <div class="p">${esc(e.place)}</div>
         <div class="cd num ${live || ph === 'live' ? 'on' : ''}">${esc(cd)}</div>
         <div class="w num">${esc(when)}</div>
+        ${calLink(s, e)}
         ${e.prediction?.picks?.length ? `<div class="fav">${e.prediction.method === 'odds' ? 'Odds favourite' : 'Favourite'} <b>${esc(shortName(e.prediction.picks[0].name, s))}</b> ${fmtPct(e.prediction.picks[0].pct)}</div>` : ''}
       </article>`;
     }).join('');
@@ -596,7 +627,7 @@
         ${(ph === 'upcoming' || ph === 'live') && e.prediction?.picks?.length ? oddsHtml(s, e) : ''}
         ${sessions}
       </div>
-      <div class="side">${when}${statusChip(e, ph, today, now)}</div>
+      <div class="side">${when}${statusChip(e, ph, today, now)}${ph === 'upcoming' || ph === 'live' ? calLink(s, e) : ''}</div>
     </div>`;
   }
 

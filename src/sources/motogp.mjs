@@ -1,6 +1,6 @@
 // MotoGP via the public API behind motogp.com (api.motogp.pulselive.com). No key needed.
 import { getJSON, sleep, toUtcIso, titleCase } from './http.mjs';
-import { applyMotorsportModel, carryPredictions, titleChances, formatPct, POINTS } from '../predict.mjs';
+import { applyMotorsportModel, applyGrid, carryPredictions, titleChances, formatPct, GRID_BETA, POINTS } from '../predict.mjs';
 
 const BASE = 'https://api.motogp.pulselive.com/motogp/v1';
 
@@ -56,6 +56,23 @@ function mapEvent(e, year, seq, results) {
 }
 
 // Race and sprint classifications of every finished round, keyed by the round's first day.
+// Starting grid of the next round once qualifying is done: Q2 gives places 1–12, Q1 the rest.
+async function gridFor(seasonUuid, categoryUuid, start) {
+  const open = await getJSON(`${BASE}/results/events?seasonUuid=${seasonUuid}&isFinished=false`);
+  const ev = open.find((x) => !x.test && x.date_start.slice(0, 10) === start);
+  if (!ev) return null;
+  const sessions = await getJSON(`${BASE}/results/sessions?eventUuid=${ev.id}&categoryUuid=${categoryUuid}`);
+  const grid = new Map();
+  for (const [num, offset] of [[2, 0], [1, 10]]) {
+    const s = sessions.find((x) => x.type === 'Q' && x.number === num && x.status === 'FINISHED');
+    if (!s) continue;
+    await sleep(250);
+    const cls = await getJSON(`${BASE}/results/session/${s.id}/classification?test=false`);
+    for (const r of cls.classification || []) if (r.position && !grid.has(r.rider.full_name)) grid.set(r.rider.full_name, r.position + offset);
+  }
+  return grid.size >= 12 ? grid : null;
+}
+
 async function resultsFor(seasonUuid, categoryUuid) {
   const out = new Map();
   const finished = await getJSON(`${BASE}/results/events?seasonUuid=${seasonUuid}&isFinished=true`);
@@ -150,6 +167,17 @@ export async function fetchMotoGP({ year = new Date().getUTCFullYear(), withResu
     teams,
     label: 'Form model: Plackett–Luce fit to this season’s sprint and Grand Prix finishing orders, recent rounds weighted more',
   });
+
+  // Once qualifying is done for the next round, fold the grid into its chances.
+  const nextRace = thisYear.find((e) => e.status === 'scheduled');
+  if (theta && nextRace && season && categoryUuid) {
+    try {
+      const grid = await gridFor(season.id, categoryUuid, nextRace.start);
+      if (grid) applyGrid(nextRace, theta, grid, { beta: GRID_BETA.motogp, names, teams, label: 'After qualifying: form model combined with the starting grid' });
+    } catch (e) {
+      console.warn('[motogp] qualifying unavailable:', e.message);
+    }
+  }
 
   const left = thisYear.filter((e) => e.status === 'scheduled').length;
   if (allStandings.length) {

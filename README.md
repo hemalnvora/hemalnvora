@@ -32,12 +32,17 @@ Upcoming events show win chances, worked out three ways:
   with the real points tables. The settings were chosen by backtesting on F1 2024–26 and MotoGP
   2025–26 (`node scripts/tune-model.mjs`): over 87 races the favourite was rated 33% on average and
   won 30% of the time.
+- **After qualifying (F1 and MotoGP):** once qualifying for the next race is done, its chances fold
+  in the grid: chance ∝ form strength × e^(−β·(grid − 1)), with β = 0.4 for F1 and 0.3 for MotoGP,
+  tuned on the same races. With the grid, F1 favourites were rated 51% and won 53% of the time.
 - **Cricket: ICC ratings.** The ICC rating system expects a side rated *d* points higher to win about
   50 + *d* per cent of matches, capped at 90%. The board uses that rule, adds a home edge (Test 15,
   ODI 10, T20I 7 rating points) and keeps 15% for a draw in Tests. Ratings live in
   `data/curated.json` (`cricketRatings`) and in the hosted board's `meta/cricket-ratings` document.
 - **Everything else: bookmaker odds**, when a reputable source publishes them. Prices are turned into
   implied chances, scaled to 100% and linked to their source. With no odds, no number is shown.
+
+Every upcoming event has a **+ Calendar** button that opens a prefilled Google Calendar event (race or match time when known, otherwise all-day).
 
 Each event keeps the prediction it had before it started, so the Results tab can show whether the
 favourite won and how often favourites have won overall.

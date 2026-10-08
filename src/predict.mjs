@@ -134,6 +134,23 @@ export function titleChances(theta, points, remaining, tables, { sims = 20000, s
   return new Map([...titles].map(([k, v]) => [k, round1((100 * v) / sims)]));
 }
 
+// How much the starting grid counts once qualifying is done: chance ∝ θ · e^(−β·(grid − 1)).
+// Tuned like MODEL on the same races: with the grid, the F1 favourite was rated 51% on average and
+// won 53% of the time (29/55); in MotoGP 49% and 50% (16/32).
+export const GRID_BETA = { f1: 0.4, motogp: 0.3 };
+
+/** Re-prices one upcoming race from the form strengths plus its qualifying order. */
+export function applyGrid(ev, theta, grid, { beta, names, teams, label }) {
+  if (!theta || !grid?.size) return false;
+  const asOf = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
+  const base = winChances(theta, [...grid.keys()]);
+  const w = base.map((c) => ({ key: c.key, v: c.pct * Math.exp(-beta * ((grid.get(c.key) ?? 25) - 1)) }));
+  const sum = w.reduce((a, x) => a + x.v, 0);
+  const chances = w.map((x) => ({ key: x.key, pct: (100 * x.v) / sum })).sort((a, b) => b.pct - a.pct);
+  ev.prediction = { ...predictionFrom(chances, names, { label, asOf, teams }), stage: 'qualifying' };
+  return true;
+}
+
 export const POINTS = {
   f1: { race: [25, 18, 15, 12, 10, 8, 6, 4, 2, 1], sprint: [8, 7, 6, 5, 4, 3, 2, 1] },
   motogp: { race: [25, 20, 16, 13, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1], sprint: [12, 9, 7, 6, 5, 4, 3, 2, 1] },

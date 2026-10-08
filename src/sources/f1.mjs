@@ -1,6 +1,6 @@
 // Formula 1 via the Jolpica API (the community successor to Ergast). No key needed.
 import { getJSON, sleep } from './http.mjs';
-import { applyMotorsportModel, carryPredictions, titleChances, formatPct, POINTS } from '../predict.mjs';
+import { applyMotorsportModel, applyGrid, carryPredictions, titleChances, formatPct, GRID_BETA, POINTS } from '../predict.mjs';
 
 const BASE = 'https://api.jolpi.ca/ergast/f1';
 
@@ -120,6 +120,20 @@ export async function fetchF1({ year = new Date().getUTCFullYear(), fallbackNext
     teams,
     label: 'Form model: Plackett–Luce fit to this season’s race and sprint finishing orders, recent rounds weighted more',
   });
+
+  // Once qualifying is done for the next race, fold the qualifying order into its chances.
+  const nextRace = current.find((e) => e.status === 'scheduled');
+  if (theta && nextRace) {
+    try {
+      await sleep(400);
+      const q = (await getJSON(`${BASE}/${year}/${nextRace.round}/qualifying/?format=json`)).MRData.RaceTable.Races[0];
+      const grid = new Map((q?.QualifyingResults || []).map((x) => [x.Driver.driverId, Number(x.position)]));
+      for (const x of q?.QualifyingResults || []) { names.set(x.Driver.driverId, driverName(x.Driver)); teams.set(x.Driver.driverId, x.Constructor.name); }
+      applyGrid(nextRace, theta, grid, { beta: GRID_BETA.f1, names, teams, label: 'After qualifying: form model combined with the qualifying order (grid penalties not included)' });
+    } catch (e) {
+      console.warn('[f1] qualifying unavailable:', e.message);
+    }
+  }
 
   await sleep(400);
   let standings = null;
